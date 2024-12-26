@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Reading Generator</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .main-button:hover {
+            background-color: #45a049;
+        }
+
+        .config-button {
+            background-color: #2196F3;
+        }
+
+        .config-button:hover {
+            background-color: #1976D2;
+        }
+
+        #statusMessage {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            display: none;
+            animation: fadeIn 0.3s;
+            z-index: 1000;
+        }
+
+        .status-message.success {
+            background-color: #4CAF50;
+        }
+
+        .status-message.error {
+            background-color: #f44336;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .config-dialog {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .config-dialog form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .config-dialog label {
+            display: block;
+            margin-bottom: 4px;
+            color: #666;
+        }
+
+        .config-dialog input,
+        .config-dialog textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .config-dialog .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .config-dialog button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .config-dialog button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .config-dialog button.cancel {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>AI Reading Generator</h1>
+            <button class="main-button" onclick="window.generateArticle()">生成阅读文章</button>
+            <button class="main-button config-button" onclick="window.showConfig()">配置设置</button>
+        </div>
+        <!-- 文章列表将在这里动态生成 -->
+    </div>
+    <div id="statusMessage" class="status-message"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html> 
